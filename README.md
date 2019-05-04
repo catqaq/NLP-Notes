@@ -2,7 +2,8 @@
 Some fun NLP projects based on Pytorch.
 - Pytorch: 1.0.1
 - Python: 3.6
-## Train and test
+## 1. LSTM part-of-speech tagger with character-level features
+### Train and test
 
 - The following command starts training.
 
