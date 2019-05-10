@@ -23,6 +23,13 @@ python lstm_tag_plus.py
 ```
 python main.py
 ```
+- Examples:
+  普通话> 你想做什么
+  四川话: 你想做啥子
+  普通话> 你怎么这么那个
+  四川话: 你啷个这么那个
+  普通话> 我明天不上班
+  四川话: 老子明天不上班
 - A jupyter-notebook version can be found in pt-sc/pt_sc.ipynb.
 
 ### Refs
