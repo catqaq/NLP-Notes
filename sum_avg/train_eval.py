@@ -139,6 +139,9 @@ def f1(targets, preds):
     print("f1: %.3f" % f1)
 
 
+#包装batch，方便调用：上面得到的iter只能通过batch的属性，即自定义的字段名称来访问数据
+
+
 class BatchWrapper(object):
     """对batch做个包装，方便调用"""
 
@@ -154,9 +157,8 @@ class BatchWrapper(object):
                 #label = torch.cat(temp)  回归怎么改？
             else:
                 raise ValueError('BatchWrapper: invalid label')
-
-            fs = [getattr(batch, x_var).unsqueeze(1)
-                  for x_var in self.x_vars]  #获取所有x属性列表，单句一个属性，双句两个属性
+            #获取所有x属性列表，单句一个属性，双句两个属性
+            fs = [getattr(batch, x_var) for x_var in self.x_vars]
 
             if self.include_lengths:
                 #堆叠多个属性
@@ -169,3 +171,4 @@ class BatchWrapper(object):
 
     def __len__(self):
         return len(self.data_iter)
+
