@@ -33,3 +33,7 @@ python main.py
 - [pytorch-official-tutorials](https://pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html)
 - [jieba-introduction](https://github.com/fxsjy/jieba)
 
+## 3. compare the sum embeddings and average embeddings based on BOW(bag of words) model
+
+## 4. Dive-into-DL-PyTorch
+- 只截取了其中第10章NLP部分，包括word2vec, glove, seq2seq, machine translation..., 详见[Dive-into-DL-PyTorch](https://github.com/ShusenTang/Dive-into-DL-PyTorch)
