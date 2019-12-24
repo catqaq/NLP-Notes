@@ -33,8 +33,12 @@ TEXT = data.Field(
 if task == 'SST':
     #SST,使用自带的，label是字符串,注意unk_token=None，否则label的词表头一个会是unk,导致label数字化后会从1开始，我们希望从0开始
     LABEL = data.Field(sequential=False, use_vocab=True, batch_first=True,unk_token=None)
+elif task == 'STS-B':
+    #回归问题，label一般为float，所以要指定dtype为float(默认为 torch.int64)
+    # #原数据集中的score为float64, 但此处要指定为float(32)，因为outputs = model(texts)为float(32)
+    LABEL = data.Field(sequential=False, use_vocab=False, batch_first=True, dtype=torch.float)
 else:
-    LABEL = data.Field(sequential=False, use_vocab=False, batch_first=True) #如果label已经是数字化了的，则use_vocab=False
+    LABEL = data.Field(sequential=False, use_vocab=False, batch_first=True) #如果label为int的，则use_vocab=False
 
 #single stencce or pair   
 pair = True if tasks[task][0]==2 else False
