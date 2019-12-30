@@ -42,8 +42,8 @@ typedef float real;                    // Precision of float numbers
  *   word - The actual string word.
  */
 struct vocab_word {
-  long long cn;
-  int *point; //记录哈夫曼路径内部节点下标
+  long long cn; //词频
+  int *point; //到达word的路径上的节点,包含叶子节点在内，len(point)=codelen+1
   char *word, *code, codelen;//单词，哈夫曼编码，编码长度
 };
 

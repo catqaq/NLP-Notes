@@ -1,15 +1,6 @@
-// 特别注意：
-// 原skip-gram：由中心词预测上下文，根据上下文的预测情况来调整中心词向量，这样每个词作为中心词时相当于1个学生 VS K1个老师(上下文词数)
-// 但此处的skip-gram: 实际上偷偷转换了输入输出，这里是以单个上下文词last_word为输入，中心词word为输出,因此实际学习的是上下文词last_word的词向量
-// 也就是说　原skip-gram的一个完整的训练样本是 (word, last_word, negatives) ---> 变为实际的skip-gram　(last_word, word, negatives)
-// 为什么可以做这样的转换？可能的原因：
-// 1.中心词和上下文的关系是此一时彼一时的，因为是上下文是逐词处理的，所以这种转换也说得通
-// 2.在word2vec的数学原理详解　一文中作者有个猜想是：本质上还是用的CBOW,逐个上下文词按CBOW处理.但也没提为何可以如此？
-// 3.skip-gram上下文词逐个处理，每次更新上下文词last_word的词向量时时用到的更新量neu1e是不同的(CBOW中更新上下文的词向量时使用的是同一个更新量neu1e)
-// 这样相当于1对1教学，每个上下文词都有1个老师。这样对句子sent训练一遍，sent[i]会先后经由K2个老师的一对一教学(此处K2取决于sent[i]出现在了多少词的上下文里，
-//和前面原skip-gram中的K不一定相等),但都是1个学生会经过多个老师的1对1调教！
-// 由于实际的窗口是从1到window随机采样得到的，如果采用原skip-gram来进行训练，则K1是不定的，每个位置的词的上下文词数可能是不同的，这样相当于有的学生只有2个老师
-// 而有的学生却有2*window个老师，老师多的可能就学得更好一些，这显然不公平；而且原skip-gram中对某个位置的词的训练是在1个窗口中完成的，
-// 这相当于K1个老师是一股脑儿的把东西全丢给学生(中心词的词向量)
-// 而实际采用的skip-gram，选定1个中心词word之后，对上下文中的每个词last_word更新时使用了不同的更新量neu1e，即1对1教学，随着窗口的移动，
-// 每个位置的词最终会经过K2个老师的一对一教学，由于每个窗口的大小是随机采样的，K2会比K1更均匀，并且对某个位置的词的训练是在K2个窗口中逐步完成的，整体效果更好
+## 详细注释版word2vec源码(well-annotated word2vec),清晰易懂！+ pytorch版word2vec
+
+### Refs
+- well-annotated word2vec基于[word2vec_commented](https://github.com/chrisjmccormick/word2vec_commented/blob/master/word2vec.c)
+- pytorch版word2vec来自[word2vec-pytorch](https://tangshusen.me/Dive-into-DL-PyTorch/#/chapter10_natural-language-processing/10.3_word2vec-pytorch)
+
