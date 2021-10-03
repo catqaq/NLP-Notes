@@ -1,4 +1,4 @@
-# NLP-Projects
+# NLP-Notes
 Some fun NLP projects based on Pytorch.
 - Pytorch: 1.0.1
 - Python: 3.6
